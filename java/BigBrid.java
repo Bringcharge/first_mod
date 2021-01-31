@@ -8,13 +8,16 @@ import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.*;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.EntityRayTraceResult;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class BigBrid extends BowItem {
 
@@ -33,17 +36,35 @@ public class BigBrid extends BowItem {
         public ObsidianArrowEntity(World worldIn, LivingEntity shooter) { super(worldIn,shooter); }
 
         private BiConsumer<Integer, Vec3d> biConsumer;
+        private Consumer<Vec3d> consumer;
 
         public void setBack(BiConsumer<Integer, Vec3d> biConsumer) {
             this.biConsumer = biConsumer;
         }
+        public void setConsumer(Consumer<Vec3d> consumer) {this.consumer = consumer;}
 
-
+//        @Override
+//        protected void arrowHit(LivingEntity living) {
+//            if (this.biConsumer != null) {
+//                this.biConsumer.accept(120, living.getPositionVec());
+//            }
+//        }
 
         @Override
-        protected void arrowHit(LivingEntity living) {
-            if (this.biConsumer != null) {
-                this.biConsumer.accept(120, living.getPositionVec());
+        protected void onHit(RayTraceResult raytraceResultIn) {
+            super.onHit(raytraceResultIn);
+            RayTraceResult.Type raytraceresult$type = raytraceResultIn.getType();
+            if (raytraceresult$type == RayTraceResult.Type.ENTITY) {
+                EntityRayTraceResult entity = (EntityRayTraceResult)raytraceResultIn;
+                if (this.biConsumer != null) {
+                    this.biConsumer.accept(120, entity.getEntity().getPositionVec());
+                }
+            } else if (raytraceresult$type == RayTraceResult.Type.BLOCK) {
+                BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult)raytraceResultIn;
+                Vec3d vec3d = blockraytraceresult.getHitVec();
+                if (this.biConsumer != null) {
+                    this.consumer.accept(vec3d);
+                }
             }
         }
     }
@@ -81,6 +102,14 @@ public class BigBrid extends BowItem {
         worldI.addEntity(abstractarrowentity);
     }
 
+    private void flash(LivingEntity livingEntity, Vec3d targetPlace) {
+        World world = livingEntity.world;
+        if (!world.isRemote) {
+            livingEntity.setPositionAndUpdate(targetPlace.getX(), targetPlace.getY(), targetPlace.getZ());
+            livingEntity.fallDistance = 0.0F;
+        }
+    }
+
     //射箭方法
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
@@ -105,10 +134,15 @@ public class BigBrid extends BowItem {
                         ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
                         ObsidianArrowEntity abstractarrowentity = new ObsidianArrowEntity(worldIn,playerentity);
 
-                        //设置击中后的函数
+                        //设置击中怪物后的函数
                         abstractarrowentity.setBack((a,b)->{
                             this.arrowNumber = a;
                             this.target3d = b;
+                        });
+
+                        //击中地面时候的函数
+                        abstractarrowentity.setConsumer((e)->{
+                            this.flash(entityLiving,e);
                         });
 
                         abstractarrowentity.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 9.0F, 1.0F);
