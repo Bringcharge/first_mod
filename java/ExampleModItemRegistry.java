@@ -19,4 +19,7 @@ public class ExampleModItemRegistry {
     public static RegistryObject<Item> bigBrid = ITEMS.register("big_brid",() -> {
         return new BigBrid((new Item.Properties()).maxDamage(384).group(ModGroup.itemGroup));
     });
+    public static RegistryObject<Item> iceSword = ITEMS.register("ice_sword",() -> {
+        return new IceSword();
+    });
 }
