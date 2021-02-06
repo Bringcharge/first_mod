@@ -1,15 +1,16 @@
 package charge.manager;
 
+import charge.manager.vec.VectorManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
 
 public class VecInstruction {
-    public static Vec3d parser(String instruction, Entity owner) {    //输入口
+    public static Vec3d parser(String instruction, InstructionsModel owner) {    //输入口
 
         String order = null;
         for (int i = 0; i<instruction.length(); i++) {
             if (instruction.charAt(i) == '#') {
-                order = instruction.substring(0, i);    //拿出命令
+                order = instruction.substring(0, i+1);    //拿出命令
                 if (i < instruction.length() -1) {
                     instruction = instruction.substring(i + 1); //设置新的值
                 }
@@ -17,8 +18,42 @@ public class VecInstruction {
             }
         }
 
-        if (order != null && order.equals("E123#")) {
-            //return ...
+        if (order != null && order.equals("V001#")) {   //向量取反
+            Vec3d p1 = InstructionsManager.vecWithString(instruction,owner);
+            if (p1 == null) {
+                return  null;
+            }
+            return VectorManager.vecRevert(p1,owner);
+        }
+
+        if (order != null && order.equals("V011#")) {   //向量加法
+            Vec3d p1 = InstructionsManager.vecWithString(instruction,owner);
+            Vec3d p2 = InstructionsManager.vecWithString(instruction,owner);
+            if (p1 == null || p2 == null) {
+                return  null;
+            }
+            return VectorManager.vecAdd(p1,p2,owner);
+        }
+
+        if (order != null && order.equals("V012#")) {   //向量减法
+            Vec3d p1 = InstructionsManager.vecWithString(instruction,owner);
+            Vec3d p2 = InstructionsManager.vecWithString(instruction,owner);
+            if (p1 == null || p2 == null) {
+                return  null;
+            }
+            return VectorManager.vecDec(p1,p2,owner);
+        }
+
+        if (order != null && order.equals("V101#")) {   //玩家视线
+            return VectorManager.vecPlayerLook(owner);
+        }
+
+        if (order != null && order.equals("V102#")) {   //玩家位置
+            return VectorManager.vecPlayerPos(owner);
+        }
+
+        if (order != null && order.equals("V103#")) {   //摄像机位置
+            return VectorManager.vecCameraPos(owner);
         }
 
         return unexpectedInput();
