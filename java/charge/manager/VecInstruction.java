@@ -5,14 +5,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
 
 public class VecInstruction {
-    public static Vec3d parser(String instruction, InstructionsModel owner) {    //输入口
+    public static Vec3d parser(Instruction instruction, InstructionsModel owner) {    //输入口
 
         String order = null;
-        for (int i = 0; i<instruction.length(); i++) {
-            if (instruction.charAt(i) == '#') {
-                order = instruction.substring(0, i+1);    //拿出命令
-                if (i < instruction.length() -1) {
-                    instruction = instruction.substring(i + 1); //设置新的值
+        for (int i = 0; i<instruction.str.length(); i++) {
+            if (instruction.str.charAt(i) == '#') {
+                order = instruction.str.substring(0, i+1);    //拿出命令
+                if (i < instruction.str.length() -1) {
+                    instruction.str = instruction.str.substring(i + 1); //设置新的值
                 }
                 break;
             }
@@ -24,6 +24,15 @@ public class VecInstruction {
                 return  null;
             }
             return VectorManager.vecRevert(p1,owner);
+        }
+
+        if (order != null && order.equals("V002#")) {   //向量缩放
+            Vec3d p1 = InstructionsManager.vecWithString(instruction,owner);
+            int p2 = InstructionsManager.integerWithString(instruction,owner);
+            if (p1 == null) {
+                return  null;
+            }
+            return VectorManager.vecScale(p1,p2,owner);
         }
 
         if (order != null && order.equals("V011#")) {   //向量加法

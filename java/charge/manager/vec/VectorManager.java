@@ -8,10 +8,13 @@ import net.minecraft.world.World;
 
 public class VectorManager {
     //v00系列是处理
-    public static Vec3d vecRevert(Vec3d vec1, InstructionsModel model) { //V001#
+    public static Vec3d vecRevert(Vec3d vec1, InstructionsModel model) { //V001# 取反
         return vec1.inverse();
     }
 
+    public static Vec3d vecScale(Vec3d vec1, int int1, InstructionsModel model) {   //V002# 缩放
+        return vec1.scale(int1);
+    }
     //v01开始的是四则运算
     public static Vec3d vecAdd(Vec3d vec1, Vec3d vec2, InstructionsModel model) {   //V011# 向量加法
         return vec1.add(vec2);

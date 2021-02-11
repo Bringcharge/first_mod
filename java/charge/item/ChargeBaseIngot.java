@@ -1,5 +1,6 @@
 package charge.item;
 
+import charge.manager.Instruction;
 import charge.manager.InstructionsManager;
 import charge.manager.InstructionsModel;
 import charge.registry.ChargeGroup;
@@ -21,8 +22,9 @@ public class ChargeBaseIngot extends Item {
         InstructionsModel model = new InstructionsModel();
         model.user = playerIn;
         model.holder = this;
-
-        InstructionsManager.functionWithString("F001#V102#", model);    //命令字符串，传入，雷劈自己
+        Instruction ins = new Instruction();
+        ins.str = "F001#V011#V102#V002#V101#I10#";
+        InstructionsManager.functionWithString(ins, model);    //命令字符串，传入，雷劈自己
 
         return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
     }
