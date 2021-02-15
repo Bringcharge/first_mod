@@ -16,8 +16,8 @@ public class IntegerInstruction {
             }
         }
 
-        if (order != null && order.substring(0,1).equals("I")) {
-            String integer = order.substring(1,order.length()-1);   //去掉#命令符
+        if (order != null && order.substring(0,2).equals("II")) {
+            String integer = order.substring(2,order.length()-1);   //去掉#命令符
             return Integer.parseInt(integer);
         }
 

@@ -16,8 +16,9 @@ public class DoubleInstruction {
             }
         }
 
-        if (order != null && order.equals("E123#")) {
-
+        if (order != null && order.substring(0,2).equals("DI")) {
+            String dou = order.substring(2,order.length()-1);   //去掉#命令符
+            return Double.parseDouble(dou);
         }
 
         return unexpectedInput();

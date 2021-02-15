@@ -27,4 +27,25 @@ public class InstructionsManager {
     public static void functionWithString(Instruction instruction, InstructionsModel owner) { //只是去执行函数的方法
         FunctionInstruction.parser(instruction, owner);
     }
+
+    public static String InstructionsBlocck (Instruction instruction, InstructionsModel owner) { //非自动机部分，用于处理代码块
+        String order = null;
+        int stackCount = 0;
+        for (int i = 0; i<instruction.str.length(); i++) {
+            if (instruction.str.charAt(i) == '{') {
+                stackCount++;
+            }
+            if (instruction.str.charAt(i) == '}') {
+                stackCount--;
+                if (stackCount == 0) {
+                    order = instruction.str.substring(1, i);    //拿出命令
+                    if (i < instruction.str.length() -1) {
+                        instruction.str = instruction.str.substring(i + 1); //设置新的值
+                    }
+                    break;
+                }
+            }
+        }
+        return order;
+    }
 }

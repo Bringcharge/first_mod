@@ -1,6 +1,8 @@
 package charge.manager.vec;
 
+import charge.manager.Instruction;
 import charge.manager.InstructionsModel;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.Vec3d;
@@ -53,6 +55,19 @@ public class VectorManager {
     public static Vec3d vecCameraPos(InstructionsModel model) {     //V103# 摄像机位置
         if (model.user != null) {
             return model.user.getPositionVec().add(new Vec3d(0,model.user.getEyeHeight(),0));
+        }
+        return null;
+    }
+
+    //V2是一些block系列的操作，还有其他的操作
+    public static Vec3d vecBlockTarget (InstructionsModel model) {  //V201# block函数附带的参数
+            return model.targetVec; //可能是空
+    }
+
+    // V3是一些跟entity有关的向量
+    public static Vec3d vecEntityPos (Entity entity, InstructionsModel model) { //V301# 实体位置
+        if (entity != null) {
+            return entity.getPositionVec();
         }
         return null;
     }

@@ -65,6 +65,14 @@ public class VecInstruction {
             return VectorManager.vecCameraPos(owner);
         }
 
+        if (order != null && order.equals("V201#")) {   //block函数里的位置
+            return VectorManager.vecBlockTarget(owner);
+        }
+
+        if (order != null && order.equals("V301#")) {   //实体位置
+            Entity p1 = InstructionsManager.entityWithString(instruction,owner);
+            return VectorManager.vecEntityPos(p1, owner);
+        }
         return unexpectedInput();
     }
 

@@ -26,6 +26,13 @@ public class FunctionInstruction {
             return;
         }
 
+        if (order != null && order.equals("F002#")) {   //射箭
+            Vec3d p1 = InstructionsManager.vecWithString(instruction,owner);
+            Vec3d p2 = InstructionsManager.vecWithString(instruction,owner);
+            double p3 = InstructionsManager.doubleWithString(instruction,owner);
+            String p4 = InstructionsManager.InstructionsBlocck(instruction,owner);
+            FunctionsManager.ShotArrow(p1,p2,p3,p4,owner);
+        }
         /*
         ...更多的函数
          */
