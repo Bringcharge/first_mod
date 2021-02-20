@@ -28,7 +28,11 @@ public class InstructionsManager {
         FunctionInstruction.parser(instruction, owner);
     }
 
-    public static String InstructionsBlocck (Instruction instruction, InstructionsModel owner) { //非自动机部分，用于处理代码块
+    public static boolean booleanWithString(Instruction instruction, InstructionsModel owner) { //bool类型的判断
+        return BooleanInstruction.parser(instruction, owner);
+    }
+
+    public static String instructionsBlocck (Instruction instruction, InstructionsModel owner) { //非自动机部分，用于处理代码块
         String order = null;
         int stackCount = 0;
         for (int i = 0; i<instruction.str.length(); i++) {
@@ -39,7 +43,7 @@ public class InstructionsManager {
                 stackCount--;
                 if (stackCount == 0) {
                     order = instruction.str.substring(1, i);    //拿出命令
-                    if (i < instruction.str.length() -1) {
+                    if (i < instruction.str.length()) {
                         instruction.str = instruction.str.substring(i + 1); //设置新的值
                     }
                     break;

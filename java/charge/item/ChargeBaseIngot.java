@@ -23,7 +23,7 @@ public class ChargeBaseIngot extends Item {
         model.user = playerIn;
         model.holder = this;
         Instruction ins = new Instruction();
-        ins.str = "F002#V103#V101#DI4#{F001#V201#}";
+        ins.str = "F002#V103#V101#DI4#{Fif#B001#E201#{F001#V201#}{F003#E101#V201#}}";
         InstructionsManager.functionWithString(ins, model);    //命令字符串，传入，雷劈自己
 
         return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));

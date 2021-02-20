@@ -3,11 +3,18 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.Vec3d;
 
-public class InstructionsModel {    //ä¸€ä¸ªModel,ç”¨äºå­˜æ”¾å„ç§éœ€è¦ä¼ å…¥çš„æ•°æ®ç»“æ„
+public class InstructionsModel {    //Ò»¸öModel,ÓÃÓÚ´æ·Å¸÷ÖÖĞèÒª´«ÈëµÄÊı¾İ½á¹¹
     public Entity user;
     public Item holder;
-    //é™„åŠ å€¼
+    //¸½¼ÓÖµ
     public Entity targetEntity;
     public Vec3d targetVec;
     //
+
+    public void copy(InstructionsModel oldModel) { //½ö½ö·µ»ØÒ»¸öÊôĞÔÏàÍ¬µÄÊµÀı£¬µ«ÊÇÊµÀı²»ÊôÓÚÍ¬Ò»¸öÖ¸Õë
+        this.holder = oldModel.holder;
+        this.user = oldModel.user;
+        this.targetEntity = oldModel.targetEntity;
+        this.targetVec = oldModel.targetVec;
+    }
 }

@@ -9,7 +9,7 @@ public class IntegerInstruction {
         for (int i = 0; i<instruction.str.length(); i++) {
             if (instruction.str.charAt(i) == '#') {
                 order = instruction.str.substring(0, i+1);    //拿出命令
-                if (i < instruction.str.length() -1) {
+                if (i < instruction.str.length()) {
                     instruction.str = instruction.str.substring(i + 1); //设置新的值
                 }
                 break;

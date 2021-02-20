@@ -1,7 +1,10 @@
 package charge.manager.fucntion;
 
 import charge.entity.ChargeArrow;
+import charge.manager.Instruction;
+import charge.manager.InstructionsManager;
 import charge.manager.InstructionsModel;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -25,11 +28,37 @@ public class FunctionsManager {
             chargeArrow.setBack((instruction,instructionsModel)->{
                 //参数注入
                 instruction.str = blockInstructions;
-                instructionsModel.holder = model.holder;
-                instructionsModel.user = model.user;
+                instructionsModel.copy(model);
             });
             chargeArrow.shoot(direction.getX(),direction.getY(),direction.getZ(), (float) speed,0.f);
             worldIn.addEntity(chargeArrow);
+        }
+    }
+
+    //传送，把entity传送到targetPlace
+    public static void deliver(LivingEntity livingEntity, Vec3d targetPlace, InstructionsModel model) {
+        if (livingEntity==null) {
+            return;
+        }
+        World world = livingEntity.world;
+        if (!world.isRemote) {
+            livingEntity.setPositionAndUpdate(targetPlace.getX(), targetPlace.getY(), targetPlace.getZ());
+            livingEntity.fallDistance = 0.0F;
+        }
+    }
+
+    //if函数
+    public static void logicIf(boolean condition, String thenCondition, String elseCondition,InstructionsModel model) { //Fif#
+        InstructionsModel newModel = new InstructionsModel();
+        newModel.copy(model);
+        Instruction instruction = new Instruction();
+
+        if (condition) {    //if 后面的条件是true
+            instruction.str = thenCondition;
+            InstructionsManager.functionWithString(instruction,newModel);
+        }else {
+            instruction.str = elseCondition;
+            InstructionsManager.functionWithString(instruction,newModel);
         }
     }
 }
