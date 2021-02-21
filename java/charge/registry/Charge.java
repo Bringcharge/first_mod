@@ -4,7 +4,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod("charge")
-public class Charge {   //ä¸»modï¼Œå«charge
+public class Charge {   //Ö÷mod£¬½Ğcharge
     public Charge(){
         ItemRegistry.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }

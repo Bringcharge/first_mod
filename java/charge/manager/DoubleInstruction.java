@@ -3,28 +3,28 @@ package charge.manager;
 import net.minecraft.entity.Entity;
 
 public class DoubleInstruction {
-    public static double parser(Instruction instruction, InstructionsModel owner) {    //è¾“å…¥
+    public static double parser(Instruction instruction, InstructionsModel owner) {    //ÊäÈë
 
         String order = null;
         for (int i = 0; i<instruction.str.length(); i++) {
             if (instruction.str.charAt(i) == '#') {
-                order = instruction.str.substring(0, i+1);    //æ‹¿å‡ºå‘½ä»¤
+                order = instruction.str.substring(0, i+1);    //ÄÃ³öÃüÁî
                 if (i < instruction.str.length()) {
-                    instruction.str = instruction.str.substring(i + 1); //è®¾ç½®æ–°çš„å€¼
+                    instruction.str = instruction.str.substring(i + 1); //ÉèÖÃĞÂµÄÖµ
                 }
                 break;
             }
         }
 
         if (order != null && order.substring(0,2).equals("DI")) {
-            String dou = order.substring(2,order.length()-1);   //å»æ‰#å‘½ä»¤ç¬¦
+            String dou = order.substring(2,order.length()-1);   //È¥µô#ÃüÁî·û
             return Double.parseDouble(dou);
         }
 
         return unexpectedInput();
     }
 
-    private static double unexpectedInput() {  //é”™è¯¯èµ°è¿™
+    private static double unexpectedInput() {  //´íÎó×ßÕâ
         return 0;
     }
 }

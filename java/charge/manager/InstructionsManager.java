@@ -5,34 +5,34 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.NBTTextComponent;
 
 
-//ä¸­è½¬å™¨ï¼Œä¼ å…¥å‚æ•°ç»Ÿä¸€æœ‰stringï¼ˆå‘½ä»¤ï¼‰å’Œentityï¼ˆè§¦å‘è€…ï¼‰ä¸¤ä¸ªï¼Œå…¶ä½™çš„åŠŸèƒ½ä¾èµ–è¿™ä¸¤ä¸ªåŠŸèƒ½å®ç°ã€‚éœ€è¦é‡æ„ï¼Œå¸¦é¢å¤–å‚æ•°çš„è¯ï¼Œå†æŠŠentityå°è£…æˆpackage
+//ÖĞ×ªÆ÷£¬´«Èë²ÎÊıÍ³Ò»ÓĞstring£¨ÃüÁî£©ºÍentity£¨´¥·¢Õß£©Á½¸ö£¬ÆäÓàµÄ¹¦ÄÜÒÀÀµÕâÁ½¸ö¹¦ÄÜÊµÏÖ¡£ĞèÒªÖØ¹¹£¬´ø¶îÍâ²ÎÊıµÄ»°£¬ÔÙ°Ñentity·â×°³Épackage
 
 public class InstructionsManager {
-    public static Entity entityWithString(Instruction instruction, InstructionsModel owner) { //è¿”è¿˜Entityçš„æ–¹æ³•
+    public static Entity entityWithString(Instruction instruction, InstructionsModel owner) { //·µ»¹EntityµÄ·½·¨
         return EntityInstruction.parser(instruction, owner);
     }
 
-    public static Vec3d vecWithString(Instruction instruction, InstructionsModel owner) { //è¿”è¿˜Vec3dçš„æ–¹æ³•
+    public static Vec3d vecWithString(Instruction instruction, InstructionsModel owner) { //·µ»¹Vec3dµÄ·½·¨
         return VecInstruction.parser(instruction, owner);
     }
 
-    public static int integerWithString(Instruction instruction, InstructionsModel owner) { //è¿”è¿˜integerçš„æ–¹æ³•
+    public static int integerWithString(Instruction instruction, InstructionsModel owner) { //·µ»¹integerµÄ·½·¨
         return IntegerInstruction.parser(instruction, owner);
     }
 
-    public static double doubleWithString(Instruction instruction, InstructionsModel owner) { //è¿”è¿˜doubleçš„æ–¹æ³•
+    public static double doubleWithString(Instruction instruction, InstructionsModel owner) { //·µ»¹doubleµÄ·½·¨
         return DoubleInstruction.parser(instruction, owner);
     }
 
-    public static void functionWithString(Instruction instruction, InstructionsModel owner) { //åªæ˜¯å»æ‰§è¡Œå‡½æ•°çš„æ–¹æ³•
+    public static void functionWithString(Instruction instruction, InstructionsModel owner) { //Ö»ÊÇÈ¥Ö´ĞĞº¯ÊıµÄ·½·¨
         FunctionInstruction.parser(instruction, owner);
     }
 
-    public static boolean booleanWithString(Instruction instruction, InstructionsModel owner) { //boolç±»å‹çš„åˆ¤æ–­
+    public static boolean booleanWithString(Instruction instruction, InstructionsModel owner) { //boolÀàĞÍµÄÅĞ¶Ï
         return BooleanInstruction.parser(instruction, owner);
     }
 
-    public static String instructionsBlocck (Instruction instruction, InstructionsModel owner) { //éè‡ªåŠ¨æœºéƒ¨åˆ†ï¼Œç”¨äºå¤„ç†ä»£ç å—
+    public static String instructionsBlocck (Instruction instruction, InstructionsModel owner) { //·Ç×Ô¶¯»ú²¿·Ö£¬ÓÃÓÚ´¦Àí´úÂë¿é
         String order = null;
         int stackCount = 0;
         if (instruction.str.charAt(0) != '{') {
@@ -45,9 +45,9 @@ public class InstructionsManager {
             if (instruction.str.charAt(i) == '}') {
                 stackCount--;
                 if (stackCount == 0) {
-                    order = instruction.str.substring(1, i);    //æ‹¿å‡ºå‘½ä»¤
+                    order = instruction.str.substring(1, i);    //ÄÃ³öÃüÁî
                     if (i < instruction.str.length()) {
-                        instruction.str = instruction.str.substring(i + 1); //è®¾ç½®æ–°çš„å€¼
+                        instruction.str = instruction.str.substring(i + 1); //ÉèÖÃĞÂµÄÖµ
                     }
                     break;
                 }

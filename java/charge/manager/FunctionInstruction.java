@@ -8,20 +8,20 @@ import net.minecraft.util.math.Vec3d;
 import java.lang.annotation.Target;
 
 public class FunctionInstruction {
-    public static void parser(Instruction instruction, InstructionsModel owner) {    //è¾“å…¥å£
+    public static void parser(Instruction instruction, InstructionsModel owner) {    //ÊäÈë¿Ú
 
         String order = null;
         for (int i = 0; i<instruction.str.length(); i++) {
             if (instruction.str.charAt(i) == '#') {
-                order = instruction.str.substring(0, i+1);    //æ‹¿å‡ºå‘½ä»¤
+                order = instruction.str.substring(0, i+1);    //ÄÃ³öÃüÁî
                 if (i < instruction.str.length()) {
-                    instruction.str = instruction.str.substring(i + 1); //è®¾ç½®æ–°çš„å€¼
+                    instruction.str = instruction.str.substring(i + 1); //ÉèÖÃĞÂµÄÖµ
                 }
                 break;
             }
         }
 
-        if (order != null && order.equals("F001#")) {   //è½é›·
+        if (order != null && order.equals("F001#")) {   //ÂäÀ×
             Vec3d p1 = InstructionsManager.vecWithString(instruction,owner);
             if (p1 == null) {
                 return;
@@ -30,7 +30,7 @@ public class FunctionInstruction {
             return;
         }
 
-        if (order != null && order.equals("F002#")) {   //å°„ç®­
+        if (order != null && order.equals("F002#")) {   //Éä¼ı
             Vec3d p1 = InstructionsManager.vecWithString(instruction,owner);
             Vec3d p2 = InstructionsManager.vecWithString(instruction,owner);
             double p3 = InstructionsManager.doubleWithString(instruction,owner);
@@ -53,15 +53,15 @@ public class FunctionInstruction {
             FunctionsManager.logicIf(p1,p2,p3,owner);
         }
         /*
-        ...æ›´å¤šçš„å‡½æ•°
+        ...¸ü¶àµÄº¯Êı
          */
-        if (order!=null && instruction.str.length() > 0) {  //å¦‚æœè§£ææˆåŠŸï¼Œå°±ç»§ç»­æ‰§è¡Œå‡½æ•°ã€‚å¦åˆ™å¯èƒ½è¿›å…¥æ­»å¾ªç¯
+        if (order!=null && instruction.str.length() > 0) {  //Èç¹û½âÎö³É¹¦£¬¾Í¼ÌĞøÖ´ĞĞº¯Êı¡£·ñÔò¿ÉÄÜ½øÈëËÀÑ­»·
             InstructionsManager.functionWithString(instruction,owner);
         }
 //        unexpectedInput();
     }
 
-    private static void unexpectedInput() {  //æ‰€æœ‰çš„é”™è¯¯èµ°è¿™
+    private static void unexpectedInput() {  //ËùÓĞµÄ´íÎó×ßÕâ
 
     }
 }

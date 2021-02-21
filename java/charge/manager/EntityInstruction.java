@@ -4,14 +4,14 @@ import charge.manager.entity.EntityManager;
 import net.minecraft.entity.Entity;
 
 public class EntityInstruction {
-    public static Entity parser(Instruction instruction, InstructionsModel owner) {    //è¾“å…¥å£
+    public static Entity parser(Instruction instruction, InstructionsModel owner) {    //ÊäÈë¿Ú
 
         String order = null;
         for (int i = 0; i<instruction.str.length(); i++) {
             if (instruction.str.charAt(i) == '#') {
-                order = instruction.str.substring(0, i+1);    //æ‹¿å‡ºå‘½ä»¤
+                order = instruction.str.substring(0, i+1);    //ÄÃ³öÃüÁî
                 if (i < instruction.str.length()) {
-                    instruction.str = instruction.str.substring(i + 1); //è®¾ç½®æ–°çš„å€¼
+                    instruction.str = instruction.str.substring(i + 1); //ÉèÖÃĞÂµÄÖµ
                 }
                 break;
             }
@@ -27,7 +27,7 @@ public class EntityInstruction {
         return unexpectedInput();
     }
 
-    private static Entity unexpectedInput() {  //é”™è¯¯èµ°è¿™
+    private static Entity unexpectedInput() {  //´íÎó×ßÕâ
         return null;
     }
 }
