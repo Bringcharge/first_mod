@@ -9,63 +9,63 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class VectorManager {
-    //v00ç³»åˆ—æ˜¯å¤„ç†
-    public static Vec3d vecRevert(Vec3d vec1, InstructionsModel model) { //V001# å–å
+    //v00ÏµÁĞÊÇ´¦Àí
+    public static Vec3d vecRevert(Vec3d vec1, InstructionsModel model) { //V001# È¡·´
         return vec1.inverse();
     }
 
-    public static Vec3d vecScale(Vec3d vec1, int int1, InstructionsModel model) {   //V002# ç¼©æ”¾
+    public static Vec3d vecScale(Vec3d vec1, int int1, InstructionsModel model) {   //V002# Ëõ·Å
         return vec1.scale(int1);
     }
-    //v01å¼€å§‹çš„æ˜¯å››åˆ™è¿ç®—
-    public static Vec3d vecAdd(Vec3d vec1, Vec3d vec2, InstructionsModel model) {   //V011# å‘é‡åŠ æ³•
+    //v01¿ªÊ¼µÄÊÇËÄÔòÔËËã
+    public static Vec3d vecAdd(Vec3d vec1, Vec3d vec2, InstructionsModel model) {   //V011# ÏòÁ¿¼Ó·¨
         return vec1.add(vec2);
     }
 
-    public static Vec3d vecDec(Vec3d vec1, Vec3d vec2, InstructionsModel model) {   //V012# å‘é‡å‡æ³• è™½ç„¶æ²¡ä»€ä¹ˆæ„ä¹‰çš„å‡æ³•ï¼Œæä¾›ä¸€ä¸ªå·¥å…·ç½¢äº†
+    public static Vec3d vecDec(Vec3d vec1, Vec3d vec2, InstructionsModel model) {   //V012# ÏòÁ¿¼õ·¨ ËäÈ»Ã»Ê²Ã´ÒâÒåµÄ¼õ·¨£¬Ìá¹©Ò»¸ö¹¤¾ß°ÕÁË
         return  vec1.add(vec2.inverse());
     }
 
-    //V02æ˜¯é˜»å¡
-    public static Vec3d vecBlockPos(Vec3d vec1, Vec3d vec2, InstructionsModel model) {  //V020# ä»vec
+    //V02ÊÇ×èÈû
+    public static Vec3d vecBlockPos(Vec3d vec1, Vec3d vec2, InstructionsModel model) {  //V020# ´Óvec
         World worldIn = model.user.world;
         if (worldIn != null && model.user != null) {
-            //æŸ¥çœ‹é˜»å¡ä½ç½®
+            //²é¿´×èÈûÎ»ÖÃ
             BlockRayTraceResult blockRayTraceResult = worldIn.rayTraceBlocks(new RayTraceContext(vec1, vec2, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, model.user));
             return blockRayTraceResult.getHitVec();
         }
         return null;
     }
 
-    //V1å¼€å§‹æ˜¯è·Ÿç©å®¶ç›¸å…³çš„æ“ä½œ
-    public static Vec3d vecPlayerLook(InstructionsModel model) {    //V101# ç©å®¶è§†çº¿
+    //V1¿ªÊ¼ÊÇ¸úÍæ¼ÒÏà¹ØµÄ²Ù×÷
+    public static Vec3d vecPlayerLook(InstructionsModel model) {    //V101# Íæ¼ÒÊÓÏß
         if (model.user != null) {
             return model.user.getLookVec().normalize();
         }
         return null;
     }
 
-    public static Vec3d vecPlayerPos(InstructionsModel model) {     //V102# ç©å®¶ä½ç½®
+    public static Vec3d vecPlayerPos(InstructionsModel model) {     //V102# Íæ¼ÒÎ»ÖÃ
         if (model.user != null) {
             return model.user.getPositionVec();
         }
         return null;
     }
 
-    public static Vec3d vecCameraPos(InstructionsModel model) {     //V103# æ‘„åƒæœºä½ç½®
+    public static Vec3d vecCameraPos(InstructionsModel model) {     //V103# ÉãÏñ»úÎ»ÖÃ
         if (model.user != null) {
             return model.user.getPositionVec().add(new Vec3d(0,model.user.getEyeHeight(),0));
         }
         return null;
     }
 
-    //V2æ˜¯ä¸€äº›blockç³»åˆ—çš„æ“ä½œï¼Œè¿˜æœ‰å…¶ä»–çš„æ“ä½œ
-    public static Vec3d vecBlockTarget (InstructionsModel model) {  //V201# blockå‡½æ•°é™„å¸¦çš„å‚æ•°
-            return model.targetVec; //å¯èƒ½æ˜¯ç©º
+    //V2ÊÇÒ»Ğ©blockÏµÁĞµÄ²Ù×÷£¬»¹ÓĞÆäËûµÄ²Ù×÷
+    public static Vec3d vecBlockTarget (InstructionsModel model) {  //V201# blockº¯Êı¸½´øµÄ²ÎÊı
+            return model.targetVec; //¿ÉÄÜÊÇ¿Õ
     }
 
-    // V3æ˜¯ä¸€äº›è·Ÿentityæœ‰å…³çš„å‘é‡
-    public static Vec3d vecEntityPos (Entity entity, InstructionsModel model) { //V301# å®ä½“ä½ç½®
+    // V3ÊÇÒ»Ğ©¸úentityÓĞ¹ØµÄÏòÁ¿
+    public static Vec3d vecEntityPos (Entity entity, InstructionsModel model) { //V301# ÊµÌåÎ»ÖÃ
         if (entity != null) {
             return entity.getPositionVec();
         }

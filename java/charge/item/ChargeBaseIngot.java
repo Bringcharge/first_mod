@@ -24,7 +24,7 @@ public class ChargeBaseIngot extends Item {
         model.holder = this;
         Instruction ins = new Instruction();
         ins.str = "F002#V103#V101#DI4#{Fif#B001#E201#{F001#V201#}{F003#E101#V201#}}";
-        InstructionsManager.functionWithString(ins, model);    //å‘½ä»¤å­—ç¬¦ä¸²ï¼Œä¼ å…¥ï¼Œé›·åŠˆè‡ªå·±
+        InstructionsManager.functionWithString(ins, model);    //ÃüÁî×Ö·û´®£¬´«Èë£¬À×Åü×Ô¼º
 
         return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
     }
