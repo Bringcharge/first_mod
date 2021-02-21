@@ -35,6 +35,9 @@ public class InstructionsManager {
     public static String instructionsBlocck (Instruction instruction, InstructionsModel owner) { //非自动机部分，用于处理代码块
         String order = null;
         int stackCount = 0;
+        if (instruction.str.charAt(0) != '{') {
+            return "";
+        }
         for (int i = 0; i<instruction.str.length(); i++) {
             if (instruction.str.charAt(i) == '{') {
                 stackCount++;
