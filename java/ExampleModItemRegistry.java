@@ -1,3 +1,5 @@
+import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -21,5 +23,15 @@ public class ExampleModItemRegistry {
     });
     public static RegistryObject<Item> iceSword = ITEMS.register("ice_sword",() -> {
         return new IceSword();
+    });
+
+
+    public static final DeferredRegister<Block> BLOCK = new DeferredRegister<>(ForgeRegistries.BLOCKS,"examplemod");
+    public static RegistryObject<Block> obsidianBlock = BLOCK.register("obsidian_block",()->{
+        return new ObsidianBlock();
+    });
+
+    public static RegistryObject<Item> obsidianBlockItem = ITEMS.register("obsidian_block",()->{    //创建一个item，其实没有item也有block
+        return new BlockItem(ExampleModItemRegistry.obsidianBlock.get(),new Item.Properties().group(ModGroup.itemGroup));
     });
 }

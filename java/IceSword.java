@@ -54,7 +54,7 @@ public class IceSword extends SwordItem {
 
     private int skillTick = 0;
 
-    //ç¡®å®šè§†çº¿ä¸Šæ˜¯å¦å­˜åœ¨è¯¥entity
+    //È·¶¨ÊÓÏßÉÏÊÇ·ñ´æÔÚ¸Ãentity
     private boolean inSight(PlayerEntity player, LivingEntity livingEntity) {
         Vec3d vec3d = player.getLook(1.0F).normalize();
         Vec3d vec3d1 = new Vec3d(player.getPosX() - livingEntity.getPosX(), player.getPosYEye() - livingEntity.getPosYEye(), player.getPosZ() - livingEntity.getPosZ()).inverse();
@@ -65,8 +65,8 @@ public class IceSword extends SwordItem {
 //            System.out.print("bringCharge: can see");
 //            System.out.println(livingEntity.getClass().getCanonicalName());
 //        }
-        //è¿™ä¸ªèƒ½çœ‹åˆ°çš„entityæœ‰å¾ˆå¤šå•Šï¼ï¼ï¼åŸºæœ¬ä¸Šåœ¨å±å¹•å†…å°±æ˜¯èƒ½çœ‹åˆ°çš„ï¼Œç”šè‡³æˆ‘ä¸çŸ¥é“æœ‰æ²¡æœ‰è¢«æŒ¡ä½çš„é€»è¾‘
-        //å°¤å…¶æ˜¯å¾€æ°´é‡Œçœ‹ä¸€çœ¼ï¼Œå…¨æ˜¯é±¼
+        //Õâ¸öÄÜ¿´µ½µÄentityÓĞºÜ¶à°¡£¡£¡£¡»ù±¾ÉÏÔÚÆÁÄ»ÄÚ¾ÍÊÇÄÜ¿´µ½µÄ£¬ÉõÖÁÎÒ²»ÖªµÀÓĞÃ»ÓĞ±»µ²×¡µÄÂß¼­
+        //ÓÈÆäÊÇÍùË®Àï¿´Ò»ÑÛ£¬È«ÊÇÓã
         return d1 > 1.0D - 0.025D / d0 ? player.canEntityBeSeen(livingEntity) : false;
 
     }
@@ -77,7 +77,7 @@ public class IceSword extends SwordItem {
         if (this.skillTick > 0) {
             this.skillTick--;
             if (this.skillTick == 0) {
-                //è®¾ç½®è‡´ç›²
+                //ÉèÖÃÖÂÃ¤
                 if (entityIn instanceof PlayerEntity) {
                     PlayerEntity player = (PlayerEntity) entityIn;
                     player.addPotionEffect(new EffectInstance(Effects.BLINDNESS,20* 5, 1));
@@ -86,16 +86,16 @@ public class IceSword extends SwordItem {
         } else {
             return;
         }
-        if (this.skillTick % 1 == 0) {   //ç°åœ¨å®šæ˜¯4tickä¸€æ¬¡
-            if (worldIn instanceof ServerWorld) {   //é¦–å…ˆä¿è¯æ˜¯åœ¨serverWordé‡Œ
+        if (this.skillTick % 1 == 0) {   //ÏÖÔÚ¶¨ÊÇ4tickÒ»´Î
+            if (worldIn instanceof ServerWorld) {   //Ê×ÏÈ±£Ö¤ÊÇÔÚserverWordÀï
                 ServerWorld serverWorld = (ServerWorld) worldIn;
                 serverWorld.getEntities().forEach(entity -> {
-                    if (entity instanceof CreatureEntity) { //ç”Ÿç‰©åˆ¤æ–­
-                        //å¼ºåˆ¶ç±»å‹è½¬æ¢
+                    if (entity instanceof CreatureEntity) { //ÉúÎïÅĞ¶Ï
+                        //Ç¿ÖÆÀàĞÍ×ª»»
                         CreatureEntity creatureEntity = (CreatureEntity)entity;
-                        if (this.inSight((PlayerEntity)entityIn,creatureEntity) ) { //èƒ½å¤Ÿçœ‹åˆ°
+                        if (this.inSight((PlayerEntity)entityIn,creatureEntity) ) { //ÄÜ¹»¿´µ½
                             creatureEntity.attackEntityFrom(DamageSource.IN_FIRE,6);
-                            creatureEntity.addPotionEffect( new EffectInstance(Effects.WITHER,3*20,3)); //è®¾ç½®é™„é­”çŠ¶æ€
+                            creatureEntity.addPotionEffect( new EffectInstance(Effects.WITHER,3*20,3)); //ÉèÖÃ¸½Ä§×´Ì¬
                             creatureEntity.setFire(90);
                         }
                     }
@@ -109,7 +109,7 @@ public class IceSword extends SwordItem {
         if (worldIn instanceof ServerWorld) {
             if (this.skillTick <= 0 ) {
                 if (playerIn.getActivePotionEffect(Effects.BLINDNESS)!= null) {
-                    System.out.println("å…¶å®ä¸æ˜¯ç©ºçš„ï¼Œä½†æ˜¯å°±æ˜¯å‡ºç°äº†é—®é¢˜");
+                    System.out.println("ÆäÊµ²»ÊÇ¿ÕµÄ£¬µ«ÊÇ¾ÍÊÇ³öÏÖÁËÎÊÌâ");
                 }
                 this.skillTick = 101;
                 return ActionResult.resultConsume(playerIn.getHeldItem(handIn));

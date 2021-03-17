@@ -60,14 +60,14 @@ public class ObsidianSword extends SwordItem {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         if (playerIn.getEntityWorld() instanceof ServerWorld) {
 
-            Vec3d vec3d = playerIn.getLook(1.f).normalize();    //瑙嗙嚎鍚戦噺
-            Vec3d vecPlayerEye = playerIn.getPositionVec().add(0,playerIn.getEyeHeight(),0);    //涓�瀹氳绠梩md鐪肩潧
+            Vec3d vec3d = playerIn.getLook(1.f).normalize();    //视线向量
+            Vec3d vecPlayerEye = playerIn.getPositionVec().add(0,playerIn.getEyeHeight(),0);    //一定要算tmd眼睛
 
-            Vec3d vec3d1 = vec3d.scale(50.f).add(vecPlayerEye);   //鏀惧ぇ闀垮害锛屽苟涓斾粠鐜╁浣嶇疆鎸囧嚭鍘伙紝鑽夛紝tmd涓�瀹氳鍔犱笂鐪肩潧楂樺害!!!
+            Vec3d vec3d1 = vec3d.scale(50.f).add(vecPlayerEye);   //放大长度，并且从玩家位置指出去，草，tmd一定要加上眼睛高度!!!
 
-            //鏌ョ湅闃诲浣嶇疆
+            //查看阻塞位置
             BlockRayTraceResult blockRayTraceResult = worldIn.rayTraceBlocks(new RayTraceContext(vecPlayerEye, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, playerIn));
-            //杈撳嚭闃诲浣嶇疆
+            //输出阻塞位置
             System.out.println(blockRayTraceResult.getHitVec());
             Vec3d finalVector = blockRayTraceResult.getHitVec();
 

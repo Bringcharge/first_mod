@@ -25,7 +25,7 @@ public class BigBrid extends BowItem {
         super(builder);
     }
 
-    //ç®­çŸ¢çš„å®žä¾‹å†…éƒ¨ç±»
+    //¼ýÊ¸µÄÊµÀýÄÚ²¿Àà
     public class ObsidianArrowEntity extends ArrowEntity {
         public ObsidianArrowEntity(EntityType<? extends ArrowEntity> type, World worldIn) {
             super(type, worldIn);
@@ -86,19 +86,19 @@ public class BigBrid extends BowItem {
         }
     }
 
-    //ç®­é›¨çš„é€ ç®­æ–¹æ³•
+    //¼ýÓêµÄÔì¼ý·½·¨
     private void creatArrowItem(Vec3d target3d, World worldI) {
         Vec3d arrowCreatPosition = target3d.add((random.nextGaussian() -0.5) * 8.f ,20, (random.nextGaussian() -0.5) * 8.f);
         Vec3d vectorToTarget = target3d.add(arrowCreatPosition.inverse());
 
-        //åˆ›å»ºç®­çŸ¢
-        ArrowItem arrowitem = (ArrowItem)(Items.ARROW); //æœ€åŽŸç‰ˆçš„ç®­çŸ¢
+        //´´½¨¼ýÊ¸
+        ArrowItem arrowitem = (ArrowItem)(Items.ARROW); //×îÔ­°æµÄ¼ýÊ¸
         AbstractArrowEntity abstractarrowentity = new ArrowEntity(worldI ,arrowCreatPosition.getX(),arrowCreatPosition.getY(),arrowCreatPosition.getZ());
 
-        //è®¾ç½®åˆé€Ÿåº¦å’Œæ•£å¸ƒ
+        //ÉèÖÃ³õËÙ¶ÈºÍÉ¢²¼
         abstractarrowentity.shoot(vectorToTarget.getX(),vectorToTarget.getY(),vectorToTarget.getZ(),2.0f,3.f);
 //        abstractarrowentity.shoot(0,-1,0,2.0f,3.f);
-        abstractarrowentity.setIsCritical(false);    //ç®­åŽé¢æ˜¯å¦å¸¦æœ‰å¤§é‡æš´å‡»ç²’å­
+        abstractarrowentity.setIsCritical(false);    //¼ýºóÃæÊÇ·ñ´øÓÐ´óÁ¿±©»÷Á£×Ó
         worldI.addEntity(abstractarrowentity);
     }
 
@@ -110,7 +110,7 @@ public class BigBrid extends BowItem {
         }
     }
 
-    //å°„ç®­æ–¹æ³•
+    //Éä¼ý·½·¨
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof PlayerEntity) {
@@ -134,13 +134,13 @@ public class BigBrid extends BowItem {
                         ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
                         ObsidianArrowEntity abstractarrowentity = new ObsidianArrowEntity(worldIn,playerentity);
 
-                        //è®¾ç½®å‡»ä¸­æ€ªç‰©åŽçš„å‡½æ•°
+                        //ÉèÖÃ»÷ÖÐ¹ÖÎïºóµÄº¯Êý
                         abstractarrowentity.setBack((a,b)->{
                             this.arrowNumber = a;
                             this.target3d = b;
                         });
 
-                        //å‡»ä¸­åœ°é¢æ—¶å€™çš„å‡½æ•°
+                        //»÷ÖÐµØÃæÊ±ºòµÄº¯Êý
                         abstractarrowentity.setConsumer((e)->{
                             this.flash(entityLiving,e);
                         });
@@ -154,7 +154,7 @@ public class BigBrid extends BowItem {
 //                            abstractarrowentity.setDamage(abstractarrowentity.getDamage() + (double)j * 0.5D + 0.5D);
 //                        }
 
-                        //å‡»é€€
+                        //»÷ÍË
 //                        abstractarrowentity.setKnockbackStrength(-5);
 
 

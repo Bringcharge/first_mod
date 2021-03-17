@@ -25,7 +25,7 @@ public class ObsidianIngot extends Item {
         super(new Properties().group(ModGroup.itemGroup));
     }
 
-    //ç®­çŸ¢çš„å®ä¾‹å†…éƒ¨ç±»
+    //¼ıÊ¸µÄÊµÀıÄÚ²¿Àà
     public class ObsidianArrowEntity extends ArrowEntity {
         public ObsidianArrowEntity(EntityType<? extends ArrowEntity> type, World worldIn) {
             super(type, worldIn);
@@ -76,14 +76,14 @@ public class ObsidianIngot extends Item {
         Vec3d arrowCreatPosition = target3d.add((random.nextGaussian() -0.5) * 8.f ,20, (random.nextGaussian() -0.5) * 8.f);
         Vec3d vectorToTarget = target3d.add(arrowCreatPosition.inverse());
 
-        //åˆ›å»ºç®­çŸ¢
-        ArrowItem arrowitem = (ArrowItem)(Items.ARROW); //æœ€åŸç‰ˆçš„ç®­çŸ¢
+        //´´½¨¼ıÊ¸
+        ArrowItem arrowitem = (ArrowItem)(Items.ARROW); //×îÔ­°æµÄ¼ıÊ¸
         AbstractArrowEntity abstractarrowentity = new ArrowEntity(worldI ,arrowCreatPosition.getX(),arrowCreatPosition.getY(),arrowCreatPosition.getZ());
 
-        //è®¾ç½®åˆé€Ÿåº¦å’Œæ•£å¸ƒ
+        //ÉèÖÃ³õËÙ¶ÈºÍÉ¢²¼
         abstractarrowentity.shoot(vectorToTarget.getX(),vectorToTarget.getY(),vectorToTarget.getZ(),2.0f,3.f);
 //        abstractarrowentity.shoot(0,-1,0,2.0f,3.f);
-        abstractarrowentity.setIsCritical(false);    //ç®­åé¢æ˜¯å¦å¸¦æœ‰å¤§é‡æš´å‡»ç²’å­
+        abstractarrowentity.setIsCritical(false);    //¼ıºóÃæÊÇ·ñ´øÓĞ´óÁ¿±©»÷Á£×Ó
         worldI.addEntity(abstractarrowentity);
     }
 
@@ -91,14 +91,14 @@ public class ObsidianIngot extends Item {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 //        if (playerIn.getEntityWorld() instanceof ServerWorld) {
 //
-            Vec3d vec3d = playerIn.getLook(1.f).normalize();    //è§†çº¿å‘é‡
-            Vec3d vecPlayerEye = playerIn.getPositionVec().add(0,playerIn.getEyeHeight(),0);    //ä¸€å®šè¦ç®—tmdçœ¼ç›
+            Vec3d vec3d = playerIn.getLook(1.f).normalize();    //ÊÓÏßÏòÁ¿
+            Vec3d vecPlayerEye = playerIn.getPositionVec().add(0,playerIn.getEyeHeight(),0);    //Ò»¶¨ÒªËãtmdÑÛ¾¦
 
-            Vec3d vec3d1 = vec3d.scale(50.f).add(vecPlayerEye);   //æ”¾å¤§é•¿åº¦ï¼Œå¹¶ä¸”ä»ç©å®¶ä½ç½®æŒ‡å‡ºå»ï¼Œè‰ï¼Œtmdä¸€å®šè¦åŠ ä¸Šçœ¼ç›é«˜åº¦!!!
+            Vec3d vec3d1 = vec3d.scale(50.f).add(vecPlayerEye);   //·Å´ó³¤¶È£¬²¢ÇÒ´ÓÍæ¼ÒÎ»ÖÃÖ¸³öÈ¥£¬²İ£¬tmdÒ»¶¨Òª¼ÓÉÏÑÛ¾¦¸ß¶È!!!
 
-            //æŸ¥çœ‹é˜»å¡ä½ç½®
+            //²é¿´×èÈûÎ»ÖÃ
             BlockRayTraceResult blockRayTraceResult = worldIn.rayTraceBlocks(new RayTraceContext(vecPlayerEye, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, playerIn));
-            //è¾“å‡ºé˜»å¡ä½ç½®
+            //Êä³ö×èÈûÎ»ÖÃ
             System.out.println(blockRayTraceResult.getHitVec());
             Vec3d finalVector = blockRayTraceResult.getHitVec();
 //
@@ -107,37 +107,37 @@ public class ObsidianIngot extends Item {
 //       }
         ItemStack stack = playerIn.getHeldItem(handIn);
         PlayerEntity playerentity = playerIn;
-        boolean flag = true;    //åæ­£æ˜¯ä¸ªflagï¼Œå½“ä½œæˆ‘æ˜¯åˆ›é€ æ¨¡å¼å°±è¡Œ
+        boolean flag = true;    //·´ÕıÊÇ¸öflag£¬µ±×÷ÎÒÊÇ´´ÔìÄ£Ê½¾ÍĞĞ
         ItemStack itemstack = playerentity.findAmmo(stack);
 
 //            int i = this.getUseDuration(stack) - timeLeft;
 //            i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, !itemstack.isEmpty() || flag);
 //            if (i < 0) return;
 
-        if (!itemstack.isEmpty() || flag) { //åæ­£æœ‰äº†flag
+        if (!itemstack.isEmpty() || flag) { //·´ÕıÓĞÁËflag
             if (itemstack.isEmpty()) {
                 itemstack = new ItemStack(Items.ARROW);
             }
 
-            float f = 3.f;  //å¥½åƒæ˜¯é€Ÿåº¦ï¼Œåº”è¯¥æ˜¯æœ€å¤§æ˜¯1ï¼Ÿ
-            if (!((double)f < 0.1D)) {  //é€Ÿåº¦è¶³å¤Ÿå¤§
-                boolean flag1 = true;   //å…ˆå‡è®¾èµ°åˆ›é€ æ¨¡å¼
+            float f = 3.f;  //ºÃÏñÊÇËÙ¶È£¬Ó¦¸ÃÊÇ×î´óÊÇ1£¿
+            if (!((double)f < 0.1D)) {  //ËÙ¶È×ã¹»´ó
+                boolean flag1 = true;   //ÏÈ¼ÙÉè×ß´´ÔìÄ£Ê½
                 if (!worldIn.isRemote) {
-                    ArrowItem arrowitem = (ArrowItem)(Items.ARROW); //æœ€åŸç‰ˆçš„ç®­çŸ¢
+                    ArrowItem arrowitem = (ArrowItem)(Items.ARROW); //×îÔ­°æµÄ¼ıÊ¸
                     ObsidianArrowEntity abstractarrowentity = new ObsidianArrowEntity(worldIn,finalVector.getX(),finalVector.getY(),finalVector.getZ());
                     abstractarrowentity.setBack((a,b)->{
                         this.arrowNumber = a;
                         this.target3d = b;
                     });
                             //arrowitem.createArrow(worldIn, itemstack, playerentity);
-//                        abstractarrowentity = customeArrow(abstractarrowentity);abstractarrowentity   //ä¸æ‡‚å¹²å˜›çš„
+//                        abstractarrowentity = customeArrow(abstractarrowentity);abstractarrowentity   //²»¶®¸ÉÂïµÄ
 
-                    //é‚£ä¸ªp_184547_4_ æ˜¯ä¸ªæ— ç”¨å‚æ•°ï¼Œå¹¶æ²¡æœ‰å®é™…è°ƒç”¨ï¼Œæœ€åä¸€ä¸ªå‚æ•°æ˜¯ä¸å‡†ç¡®æ€§
+                    //ÄÇ¸öp_184547_4_ ÊÇ¸öÎŞÓÃ²ÎÊı£¬²¢Ã»ÓĞÊµ¼Êµ÷ÓÃ£¬×îºóÒ»¸ö²ÎÊıÊÇ²»×¼È·ĞÔ
 //                    abstractarrowentity.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 3.0F, 1.0F);
                     abstractarrowentity.shoot(-vec3d.getX(),-vec3d.getY(),-vec3d.getZ(),f * 1.0f,0.f);
-                    abstractarrowentity.setIsCritical(true);    //ç®­åé¢æ˜¯å¦å¸¦æœ‰å¤§é‡æš´å‡»ç²’å­
+                    abstractarrowentity.setIsCritical(true);    //¼ıºóÃæÊÇ·ñ´øÓĞ´óÁ¿±©»÷Á£×Ó
 
-                    //ä¸‹é¢ä¸€ç³»åˆ—çš„é™„é­”æ£€æµ‹ï¼Œæš‚æ—¶ä¸å¤„ç†
+                    //ÏÂÃæÒ»ÏµÁĞµÄ¸½Ä§¼ì²â£¬ÔİÊ±²»´¦Àí
 //                        int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
 //                        if (j > 0) {
 //                            abstractarrowentity.setDamage(abstractarrowentity.getDamage() + (double)j * 0.5D + 0.5D);
@@ -151,28 +151,28 @@ public class ObsidianIngot extends Item {
 //                        if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0) {
 //                            abstractarrowentity.setFire(100);
 //                        }
-                    //ç»™ç‰©å“æ‰è€ä¹…
+                    //¸øÎïÆ·µôÄÍ¾Ã
 //                    stack.damageItem(1, playerentity, (p_220009_1_) -> {
 //                        p_220009_1_.sendBreakAnimation(playerentity.getActiveHand());
 //                    });
 
-                    //è®¾ç½®æ˜¯å¦èƒ½å¤Ÿæ¡èµ·
+                    //ÉèÖÃÊÇ·ñÄÜ¹»¼ñÆğ
 //                        if (flag1 || playerentity.abilities.isCreativeMode && (itemstack.getItem() == Items.SPECTRAL_ARROW || itemstack.getItem() == Items.TIPPED_ARROW)) {
                     abstractarrowentity.pickupStatus = AbstractArrowEntity.PickupStatus.DISALLOWED;
 //                        }
 
                     worldIn.addEntity(abstractarrowentity);
                 }
-                //å£°éŸ³è®¾ç½®
+                //ÉùÒôÉèÖÃ
                 worldIn.playSound((PlayerEntity)null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
-                if (!flag1 && !playerentity.abilities.isCreativeMode) { //åˆ é™¤ç®­çŸ¢çš„å‡½æ•°
+                if (!flag1 && !playerentity.abilities.isCreativeMode) { //É¾³ı¼ıÊ¸µÄº¯Êı
                     itemstack.shrink(1);
                     if (itemstack.isEmpty()) {
                         playerentity.inventory.deleteStack(itemstack);
                     }
                 }
-                //è¿™tmæ˜¯å•¥ï¼Ÿ
+                //ÕâtmÊÇÉ¶£¿
 //                    playerentity.addStat(Stats.ITEM_USED.get(this));
             }
         }
