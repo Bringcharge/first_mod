@@ -91,6 +91,7 @@ public class BigBrid extends BowItem {
         Vec3d arrowCreatPosition = target3d.add((random.nextGaussian() -0.5) * 8.f ,20, (random.nextGaussian() -0.5) * 8.f);
         Vec3d vectorToTarget = target3d.add(arrowCreatPosition.inverse());
 
+        target3d.inverse();
         //创建箭矢
         ArrowItem arrowitem = (ArrowItem)(Items.ARROW); //最原版的箭矢
         AbstractArrowEntity abstractarrowentity = new ArrowEntity(worldI ,arrowCreatPosition.getX(),arrowCreatPosition.getY(),arrowCreatPosition.getZ());

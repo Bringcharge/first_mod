@@ -34,4 +34,22 @@ public class ExampleModItemRegistry {
     public static RegistryObject<Item> obsidianBlockItem = ITEMS.register("obsidian_block",()->{    //创建一个item，其实没有item也有block
         return new BlockItem(ExampleModItemRegistry.obsidianBlock.get(),new Item.Properties().group(ModGroup.itemGroup));
     });
+
+    //一个新的方块模型
+    public static RegistryObject<Block> obsidianRubikCube = BLOCK.register("obsidian_rubik_cube",()->{
+        return new ObsidianRubikCube();
+    });
+
+    public static RegistryObject<Item> obsidianRubikCubeItem = ITEMS.register("obsidian_rubik_cube",()->{
+       return new BlockItem(ExampleModItemRegistry.obsidianRubikCube.get(),new Item.Properties().group(ModGroup.itemGroup));
+    });
+
+    //
+    public static RegistryObject<Block> obsidianFrame = BLOCK.register("obsidian_frame", () -> {
+        return new ObsidianFrame();
+    });
+
+    public static RegistryObject<Item> obssidianFrame = ITEMS.register("obsidian_frame", () -> {
+        return new BlockItem(ExampleModItemRegistry.obsidianFrame.get(), new Item.Properties().group(ModGroup.itemGroup));
+    });
 }

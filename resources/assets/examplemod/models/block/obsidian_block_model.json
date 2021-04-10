@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "examplemod:item/obsidian_block_texture"
+    "all": "examplemod:block/obsidian_block_texture"
   }
 }
