@@ -1,11 +1,10 @@
+
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -15,23 +14,15 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-
-public class ObsidianRubikCube extends Block {
-
-//    private static IntegerProperty STATE = IntegerProperty.create("face",0,1);  //命名为face字段，在obsidian_rubik_cube.json里有相关的字段
-
-    public ObsidianRubikCube() {
-        super(Properties.create(Material.ROCK).hardnessAndResistance(5));
-//        this.setDefaultState(this.getStateContainer().getBaseState().with(STATE,1));
+public class ObsidianCounter extends Block{
+    public ObsidianCounter() {
+        super(Block.Properties.create(Material.ROCK).hardnessAndResistance(5));
     }
 
-//    @Override
-//    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-//        builder.add(STATE);
-//        super.fillStateContainer(builder);
-//    }
-
-
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
 
     @Nullable
     @Override
@@ -40,19 +31,14 @@ public class ObsidianRubikCube extends Block {
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
-
-    @Override
-    //fine ，没找到能替代的函数。
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote && handIn == Hand.MAIN_HAND) {
             ObsidianCounterTileEntity obsidianCounterTileEntity = (ObsidianCounterTileEntity) worldIn.getTileEntity(pos);
             int counter = obsidianCounterTileEntity.increase();
-            TranslationTextComponent translationTextComponent = new TranslationTextComponent("message.examplemod.counter", counter);
+            TranslationTextComponent translationTextComponent = new TranslationTextComponent("输出" + counter);
             player.sendStatusMessage(translationTextComponent, false);
         }
-        return ActionResultType.SUCCESS;    //点击事件成功
+        return ActionResultType.SUCCESS;
     }
+
 }

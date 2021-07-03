@@ -52,4 +52,12 @@ public class ExampleModItemRegistry {
     public static RegistryObject<Item> obssidianFrame = ITEMS.register("obsidian_frame", () -> {
         return new BlockItem(ExampleModItemRegistry.obsidianFrame.get(), new Item.Properties().group(ModGroup.itemGroup));
     });
+
+    //试试看能不能做一个tile实例出来
+    public static RegistryObject<Block> obsidianCounterBlock = BLOCK.register("obsidian_counter_block", () -> {
+        return new ObsidianCounter();
+    });
+    public static RegistryObject<Item> obsidianCounterBlockItem = ITEMS.register("obsidian_counter_block", () -> {
+        return new BlockItem(ExampleModItemRegistry.obsidianCounterBlock.get(), new Item.Properties().group(ModGroup.itemGroup));
+    });
 }
